@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Marck+Script&family=Roboto:wght@300&display=swap');
+
 :root {
   --main-color: green;
   --secondary-color: yellow;
@@ -8,6 +10,7 @@ body {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  font-family: 'Roboto', sans-serif;
 }
 
 *, *::after, *::before{
@@ -20,51 +23,36 @@ body {
   width: 100vw;
   justify-content: center;
   align-items: center;
-  /* background-image: linear-gradient(to left bottom, #dde0b6, #e1d4a3, #e7c793, #efb888, #f5a883); */
-  /* background-image: linear-gradient(to left, #d7ca96, #b8bd88, #98b07e, #78a377, #579573); */
   background-image: url('./photos/worn-dots.png');
   background-color: #eae7e0;
-  /* box-shadow: inset 100px 100px 100px black; */
 }
-
-/* .wrapper::before{
-  content: "";
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background-image: url('./photos/nordwood-themes-wtevVfGYwnM-unsplash.jpg');
-  background-size: cover;
-  /* filter: blur(5px) opacity(1); */
-  /* box-shadow: none;
-  z-index: -1; */
  
 
 .form-content {
   flex:1;
   height: 100%;
   position: relative;
-  /* padding: 0.5em; */
-  
-  
   padding: 0.7em;
-
   background-color: white;
-  /* background-image: url('./photos/nordwood-themes-wtevVfGYwnM-unsplash.jpg');
-  background-size: cover; */
 }
 
-.photo-left{
+.photo-left {
   background: url('./photos/background.jpg');
   background-size: cover;
   height: 100%;
   flex:1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: black;
 }
 
 .content-wrapper{
   width: 80%;
   height: 80%;
   display: flex;
-  border-radius: 1rem;
+  box-shadow: 1px 1px 20px black;
 }
 
 label, input {
@@ -99,7 +87,7 @@ input {
 }
 
 ::placeholder{
-  color: white;
+  color: black;
 }
 input:focus{
   background-color: rgba(255, 255, 255, 0.6);
@@ -107,5 +95,25 @@ input:focus{
   outline: none;
 }
 
+.text-left{
+  background-color: rgba(0, 0, 0, 0.4);  
+  backdrop-filter: blur(5px);
+  padding: 1.5em;
+  width: 100%;
+}
+
+.text-left h1{
+  font-family: 'Marck Script', cursive;
+  color: #fbc11a;
+  font-size: 3rem;
+  text-decoration: underline;
+}
+
+.text-left h3{
+  font-family: 'Roboto', sans-serif;
+  color: white;
+  letter-spacing: 0.05em;
+  font-weight: lighter;
+}
 
 

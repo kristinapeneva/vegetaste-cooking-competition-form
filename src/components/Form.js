@@ -62,7 +62,12 @@ function Form({submitForm}) {
     return (
         <div className="wrapper">
             <div className="content-wrapper">
-            <div className="photo-left"></div>
+            <div className="photo-left">
+                <div className="text-left">
+                <h1>VegeTaste</h1>
+                <h3>Reserve your spot now!</h3>
+                </div>
+            </div>
             <div className="form-content">
             <form className="form" onSubmit={handleSubmit}>
                 <h1>Dish React App</h1>

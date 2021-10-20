@@ -8,6 +8,7 @@ const useForm = (callback, validate)  => {
         dishType: ''
     })
 
+    let showExtraFields = null;
 
 
     const handleChange = e => {
@@ -37,7 +38,7 @@ const useForm = (callback, validate)  => {
       );
 
 
-    return { handleChange, handleSubmit, values, errors }
+    return { handleChange, handleSubmit, values, errors, showExtraFields }
 }
 
 export default useForm

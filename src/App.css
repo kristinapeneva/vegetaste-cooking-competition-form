@@ -1,38 +1,111 @@
-.App {
-  text-align: center;
+:root {
+  --main-color: green;
+  --secondary-color: yellow;
+  font-size: calc(0.5em + 1vmin);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+*, *::after, *::before{
+  box-sizing: border-box;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.wrapper {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  justify-content: center;
+  align-items: center;
+  /* background-image: linear-gradient(to left bottom, #dde0b6, #e1d4a3, #e7c793, #efb888, #f5a883); */
+  /* background-image: linear-gradient(to left, #d7ca96, #b8bd88, #98b07e, #78a377, #579573); */
+  background-image: url('./photos/worn-dots.png');
+  background-color: #eae7e0;
+  /* box-shadow: inset 100px 100px 100px black; */
+}
+
+/* .wrapper::before{
+  content: "";
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-image: url('./photos/nordwood-themes-wtevVfGYwnM-unsplash.jpg');
+  background-size: cover;
+  /* filter: blur(5px) opacity(1); */
+  /* box-shadow: none;
+  z-index: -1; */
+ 
+
+.form-content {
+  flex:1;
+  height: 100%;
+  position: relative;
+  /* padding: 0.5em; */
+  
+  
+  padding: 0.7em;
+
+  background-color: white;
+  /* background-image: url('./photos/nordwood-themes-wtevVfGYwnM-unsplash.jpg');
+  background-size: cover; */
+}
+
+.photo-left{
+  background: url('./photos/background.jpg');
+  background-size: cover;
+  height: 100%;
+  flex:1;
+}
+
+.content-wrapper{
+  width: 80%;
+  height: 80%;
+  display: flex;
+  border-radius: 1rem;
+}
+
+label, input {
+  display: block;
+  width: 100%;
+}
+
+.form {
+  position: relative;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+}
+
+button{
+  position: absolute;
+  bottom: 0;
+  align-self: flex-start;
+  width: 100%;
+  /* margin: 10% 0; */
+}
+
+input {
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  background:none;
+  color: #4d9699;
+  border: none;
+  border: solid 1.5px #4d9699;
+  border-radius: 0.3em;
+  padding: 0.2em;
+}
+
+::placeholder{
   color: white;
 }
+input:focus{
+  background-color: rgba(255, 255, 255, 0.6);
 
-.App-link {
-  color: #61dafb;
+  outline: none;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+
+

@@ -1,31 +1,69 @@
 import React, { useState, useEffect } from 'react';
 import validate from './validateInfo'
-import useForm from './useForm';
+// import useForm from './useForm';
+import axios from 'axios'
 
 
 function Form({submitForm}) {
-    const { handleChange, handleSubmit, values, errors} = useForm(
-        submitForm,
-        validate
-      );
-    
-      let showExtraFields = null;
+    const [values, setValues] = useState({
+        dishName: '',
+        time: '',
+        dishType: '',
+        noOfSlices: 1,
+        diameter: 1,
+        spicinessScale: 1,
+        slicesOfBread: 1
+    })
 
-      if (values.dishType === "pizza") {
-          showExtraFields = <input
-                        id="time"
-                        type="text"
-                        name="time" 
-                        className="form-input" 
-                        placeholder="Time"
-                        onChange={handleChange}
-                        value={values.time}
-                    />
-      }
+    const handleChange = e => {
+        const { name, value } = e.target;
+        setValues ({
+            ...values,
+            [name]: value
+        })
+    }
+
+    const[errors, setErrors] = useState({})
+    const[isSubmitting, setIsSubmitting] = useState(false)
+
+    const handleSubmit = e => {
+        e.preventDefault();
+        setErrors(validate(values));
+        setIsSubmitting(true)
+        console.log(values)
+        fetch('https://frosty-wood-6558.getsandbox.com:443/dishes', {
+            method: 'POST',
+            headers: {"Accept": 'application/json', "Content-Type": "application/json"},
+            body: JSON.stringify({
+                name: values.dishName,
+                preparation_time: values.time,
+                type: values.dishType,
+                no_of_slices: Number(values.noOfSlices),
+                diameter: Number(values.diameter)
+            })
+        }).then(function (response) {
+            return response.json()
+        }).then(function (response) {
+            console.log(response);
+        })
+    }
+
+    useEffect(
+        () => {
+          if (Object.keys(errors).length === 0 && isSubmitting) {
+            submitForm();
+          }
+        },
+        [errors]
+      );
+
 
 
     return (
-        <div className="form-content">
+        <div className="wrapper">
+            <div className="content-wrapper">
+            <div className="photo-left"></div>
+            <div className="form-content">
             <form className="form" onSubmit={handleSubmit}>
                 <h1>Dish React App</h1>
                 <div className="form-inputs">
@@ -70,12 +108,79 @@ function Form({submitForm}) {
                     </select>
                     {errors.dishType && <p>{errors.dishType}</p>}
                 </div>
-                {values.dishType}
-                {showExtraFields}
+                {values.dishType === "pizza" && 
+                <div>
+                    <div>
+                    <label className="form-label" htmlFor="type">
+                        Number of Slices:
+                    </label>
+                        <input
+                            id="no_of_slices"
+                            type="number"
+                            pattern='[0-9]'
+                            name="noOfSlices" 
+                            className="form-input"  
+                            placeholder="Number of Slices"
+                            onChange={handleChange}
+                            value={values.noOfSlices}
+                            />
+                        {errors.noOfSlices && <p>{errors.noOfSlices}</p>}
+                        </div>
+                        <div>
+                        <label className="form-label" htmlFor="type">
+                        Diameter: 
+                        </label>
+                        <input
+                            id="diameter"
+                            type="number"
+                            name="diameter" 
+                            className="form-input" 
+                            placeholder="Diameter"
+                            onChange={handleChange}
+                            value={values.diameter}
+                        /> 
+                        {errors.diameter && <p>{errors.diameter}</p>}
+                                </div>
+                                </div>
+                                }
+                {values.dishType === "soup" && <div>
+                <label className="form-label" htmlFor="type">
+                        Spiciness Scale: 
+                    </label>
+                <input
+                            id="spiciness_scale"
+                            type="number"
+                            pattern='[0-10]'
+                            name="spicinessScale" 
+                            className="form-input" 
+                            placeholder="Spiciness Scale"
+                            onChange={handleChange}
+                            value={values.spicinessScale}
+                        /> 
+                        {errors.spicinessScale && <p>{errors.spicinessScale}</p>}
+                                </div>}
+                {values.dishType === "sandwich" && <div>
+                <label className="form-label" htmlFor="type">
+                        Slices Of Bread: 
+                    </label>
+                <input
+                            id="slices_of_bread"
+                            type="number"
+                            pattern='[0-10]'
+                            name="slicesOfBread" 
+                            className="form-input" 
+                            placeholder="Slices Of Bread"
+                            onChange={handleChange}
+                            value={values.slicesOfBread}
+                        /> 
+                        {errors.slicesOfBread && <p>{errors.slicesOfBread}</p>}
+                                </div>}
                 <button type="submit" className="form-input-btn">
                     Submit
                 </button>
             </form>
+        </div>
+        </div>
         </div>
     )
 }

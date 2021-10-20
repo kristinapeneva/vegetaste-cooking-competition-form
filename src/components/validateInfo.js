@@ -14,6 +14,21 @@ function validateInfo(values) {
         if(!values.dishType) {
             errors.dishType = "Dish type is required"
         }
+        else {
+            if(values.dishType === "pizza" && !values.noOfSlices) {
+                errors.noOfSlices = "Number of slices is required"
+            }
+            if(values.dishType === "pizza" && !values.diameter) {
+                errors.diameter = "Diameter is required"
+            }
+            if(values.dishType === "soup" && !values.spicinessScale) {
+                errors.diameter = "Spiciness is required"
+            }
+            if(values.dishType === "sandwich" && !values.slicesOfBread) {
+                errors.diameter = "SlicesOfBread is required"
+            }
+        }
+
 
         return errors;
 }

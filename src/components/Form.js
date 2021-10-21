@@ -4,6 +4,7 @@ import TimeFormat from 'hh-mm-ss'
 // import useForm from './useForm';
 import TimeField from 'react-simple-timefield';
 import axios from 'axios'
+import Slider from 'rsuite/Slider';
 
 
 function Form({submitForm}) {
@@ -20,6 +21,7 @@ function Form({submitForm}) {
         slicesOfBread: 1
     })
 
+    const [error, setError] = useState(null)
     const handleChange = e => {
         const { name, value } = e.target;
         setValues ({
@@ -48,10 +50,20 @@ function Form({submitForm}) {
                 no_of_slices: Number(values.noOfSlices),
                 diameter: Number(values.diameter)
             })
-        }).then(function (response) {
+        }).then(res => {
+            if(!res.ok) {
+                throw Error('There`s an error. Check the submitted data.')
+            }
+            return res.json()
+        })
+        
+        .then(function (response) {
             return response.json()
         }).then(function (response) {
             console.log(response);
+        }).catch(err => {
+            setError(err.message)
+            console.log(err.message)
         })
     }
 
@@ -95,21 +107,17 @@ function Form({submitForm}) {
                 </div>
                 <div className="form-inputs">
                     <label className="form-label" htmlFor="time">
-                        Preparation Time:  
+                        Preparation Time (hh:mm:ss):  
                     </label>
-                    <TimeField value={values.time} onChange={handleChange} showSeconds={true} className="form-input" name="time" style={{width: '100%'}}/>
+                    <TimeField value={values.time} onChange={handleChange} showSeconds={true} className="form-input" name="time" style={{width: '100%'}} />
                     {errors.time && <p>{errors.time}</p>}
                 </div>
                 <div className="form-inputs">
-                    <label className="form-label" htmlFor="type">
+                <label className="form-label" htmlFor="type">
                         Dish Type:
                     </label>
-                    {/* <select id="type" onChange={handleChange} value={values.dishType} name="dishType">
-                            <option value="">Choose...</option>
-                            <option value="pizza">Pizza</option>
-                            <option value="soup">Soup</option>
-                            <option value="sandwich">Sandwich</option>
-                    </select> */}
+                    <div className="dish-type">
+                    <div className="dish-type-choice">
                     <label>
                         <input type="radio" value="pizza" checked={values.dishType==="pizza"} onChange={handleChange} name="dishType"/><span>Pizza</span>
                     </label>
@@ -120,9 +128,9 @@ function Form({submitForm}) {
                         <input type="radio" value="sandwich" checked={values.dishType==="sandwich"} onChange={handleChange} name="dishType" /><span>Sandwich</span>
                     </label>
                     {errors.dishType && <p>{errors.dishType}</p>}
-                </div>
+                    </div>
                 {values.dishType === "pizza" && 
-                <div>
+                <div className="dish-type-fields">
                     <div>
                     <label className="form-label" htmlFor="type">
                         Number of Slices:
@@ -154,15 +162,15 @@ function Form({submitForm}) {
                         /> 
                         {errors.diameter && <p>{errors.diameter}</p>}
                                 </div>
-                                </div>
+                </div>
                                 }
-                {values.dishType === "soup" && <div>
+                {values.dishType === "soup" && <div className="dish-type-fields">
                 <label className="form-label" htmlFor="type">
                         Spiciness Scale: 
                     </label>
                 <input
                             id="spiciness_scale"
-                            type="number"
+                            type="range"
                             pattern='[0-10]'
                             name="spicinessScale" 
                             className="form-input" 
@@ -172,7 +180,7 @@ function Form({submitForm}) {
                         /> 
                         {errors.spicinessScale && <p>{errors.spicinessScale}</p>}
                                 </div>}
-                {values.dishType === "sandwich" && <div>
+                {values.dishType === "sandwich" && <div className="dish-type-fields">
                 <label className="form-label" htmlFor="type">
                         Slices Of Bread: 
                     </label>
@@ -188,11 +196,16 @@ function Form({submitForm}) {
                         /> 
                         {errors.slicesOfBread && <p>{errors.slicesOfBread}</p>}
                                 </div>}
+                </div>
+                </div>
+                
                 <button type="submit" className="form-input-btn">
-                    Submit
+                    Register Now!
                 </button>
+                {error && <div>{ error }</div>}
             </form>
         </div>
+
         </div>
         </div>
     )

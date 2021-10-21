@@ -7,9 +7,9 @@ function validateInfo(values) {
             errors.dishName = "Dish name required"
         }
 
-        // if(!values.time.trim()) {
-        //     errors.time = "Preparation time required"
-        // }
+        if(!values.time.trim()) {
+            errors.time = "Preparation time required"
+        }
 
         if(!values.dishType) {
             errors.dishType = "Dish type is required"

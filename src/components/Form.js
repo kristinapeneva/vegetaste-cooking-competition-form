@@ -104,12 +104,21 @@ function Form({submitForm}) {
                     <label className="form-label" htmlFor="type">
                         Dish Type:
                     </label>
-                    <select id="type" onChange={handleChange} value={values.dishType} name="dishType">
+                    {/* <select id="type" onChange={handleChange} value={values.dishType} name="dishType">
                             <option value="">Choose...</option>
                             <option value="pizza">Pizza</option>
                             <option value="soup">Soup</option>
                             <option value="sandwich">Sandwich</option>
-                    </select>
+                    </select> */}
+                    <label>
+                        <input type="radio" value="pizza" checked={values.dishType==="pizza"} onChange={handleChange} name="dishType"/><span>Pizza</span>
+                    </label>
+                    <label>
+                        <input type="radio" value="soup" checked={values.dishType==="soup"} onChange={handleChange} name="dishType" /><span>Soup</span>
+                    </label>
+                    <label>
+                        <input type="radio" value="sandwich" checked={values.dishType==="sandwich"} onChange={handleChange} name="dishType" /><span>Sandwich</span>
+                    </label>
                     {errors.dishType && <p>{errors.dishType}</p>}
                 </div>
                 {values.dishType === "pizza" && 

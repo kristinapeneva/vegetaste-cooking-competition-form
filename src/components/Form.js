@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import validate from './validateInfo'
+import TimeFormat from 'hh-mm-ss'
 // import useForm from './useForm';
+import TimeField from 'react-simple-timefield';
 import axios from 'axios'
 
 
 function Form({submitForm}) {
     const [values, setValues] = useState({
         dishName: '',
+        hours: 0,
         time: '',
+        minutes: 0,
+        seconds: 0,
         dishType: '',
         noOfSlices: 1,
         diameter: 1,
@@ -22,6 +27,8 @@ function Form({submitForm}) {
             [name]: value
         })
     }
+
+    let preparationTime = values.hours*3600 + values.minutes*60 + values.seconds;
 
     const[errors, setErrors] = useState({})
     const[isSubmitting, setIsSubmitting] = useState(false)
@@ -48,6 +55,8 @@ function Form({submitForm}) {
         })
     }
 
+    
+
     useEffect(
         () => {
           if (Object.keys(errors).length === 0 && isSubmitting) {
@@ -58,19 +67,17 @@ function Form({submitForm}) {
       );
 
 
-
     return (
         <div className="wrapper">
             <div className="content-wrapper">
             <div className="photo-left">
                 <div className="text-left">
                 <h1>VegeTaste</h1>
-                <h3>Reserve your spot now!</h3>
                 </div>
             </div>
             <div className="form-content">
             <form className="form" onSubmit={handleSubmit}>
-                <h1>Dish React App</h1>
+                <h1>What are you going to prepare for our judges?</h1>
                 <div className="form-inputs">
                     <label className="form-label" htmlFor="name">
                         Dish Name: 
@@ -80,7 +87,7 @@ function Form({submitForm}) {
                         type="text"
                         name="dishName" 
                         className="form-input" 
-                        placeholder="Enter dish name"
+                        placeholder="Enter dish name..."
                         onChange={handleChange}
                         value={values.dishName}
                     />
@@ -88,17 +95,9 @@ function Form({submitForm}) {
                 </div>
                 <div className="form-inputs">
                     <label className="form-label" htmlFor="time">
-                        Time:  
+                        Preparation Time:  
                     </label>
-                    <input
-                        id="time"
-                        type="text"
-                        name="time" 
-                        className="form-input" 
-                        placeholder="Time"
-                        onChange={handleChange}
-                        value={values.time}
-                    />
+                    <TimeField value={values.time} onChange={handleChange} showSeconds={true} className="form-input" name="time" style={{width: '100%'}}/>
                     {errors.time && <p>{errors.time}</p>}
                 </div>
                 <div className="form-inputs">

@@ -29,10 +29,10 @@ body {
  
 
 .form-content {
-  flex:1;
+  width: 50%;
   height: 100%;
   position: relative;
-  padding: 0.7em;
+  padding: 1.5em;
   background-color: white;
 }
 
@@ -55,7 +55,7 @@ body {
   box-shadow: 1px 1px 20px black;
 }
 
-label, input {
+label, .form-input {
   display: block;
   width: 100%;
 }
@@ -72,10 +72,9 @@ button{
   bottom: 0;
   align-self: flex-start;
   width: 100%;
-  /* margin: 10% 0; */
 }
 
-input {
+.form-input {
   margin-bottom: 1rem;
   font-size: 1rem;
   background:none;
@@ -83,16 +82,20 @@ input {
   border: none;
   border: solid 1.5px #4d9699;
   border-radius: 0.3em;
-  padding: 0.2em;
+  padding: 0.5em;
 }
 
 ::placeholder{
-  color: black;
+  color: grey;
 }
-input:focus{
+.form-input:focus{
   background-color: rgba(255, 255, 255, 0.6);
 
   outline: none;
+}
+
+.form.input:focus::placeholder{
+  color: transparent;
 }
 
 .text-left{
@@ -116,4 +119,8 @@ input:focus{
   font-weight: lighter;
 }
 
+label {
+  font-weight: bolder;
+  margin-bottom: 0.2em;
+}
 

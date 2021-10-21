@@ -30,7 +30,7 @@ body {
 
 .form-content {
   min-width: 320px;
-  max-width: 700px;
+  max-width: 640px;
   width: 50%;
   height: 100%;
   position: relative;
@@ -53,6 +53,7 @@ body {
 .content-wrapper{
   width: 80%;
   height: 80%;
+  min-height: fit-content;
   display: flex;
   box-shadow: 1px 1px 20px black;
 }
@@ -146,19 +147,25 @@ label {
 }
 
 .dish-type {
-  display: flex;
+  /* display: flex; */
   justify-content: stretch;
 }
 
 .dish-type-choice{
-  width: 40%;
+  width: 50%;
   display: flex;
   flex-direction: column;
 }
 
 .dish-type-fields{
-  width: 60%;
-  display: flex;
-  flex-direction: column;
+  width: 50%;
+  /* display: flex; */
   justify-content: last baseline;
+  gap: 10%;
+}
+
+
+.spiciness-scale{
+  display: flex;
+  width: 100%;
 }

@@ -3,6 +3,7 @@ import validate from './validateInfo'
 import TimeFormat from 'hh-mm-ss'
 // import useForm from './useForm';
 import TimeField from 'react-simple-timefield';
+import NumberFormat from 'react-number-format';
 import axios from 'axios'
 import Slider from 'rsuite/Slider';
 
@@ -21,19 +22,21 @@ function Form({submitForm}) {
         slicesOfBread: 1
     })
 
-    const [error, setError] = useState(null)
+    const [errorEnd, setErrorEnd] = useState(null)
     const handleChange = e => {
         const { name, value } = e.target;
         setValues ({
             ...values,
             [name]: value
         })
+        console.log(values.noOfSlices)
     }
 
     let preparationTime = values.hours*3600 + values.minutes*60 + values.seconds;
 
     const[errors, setErrors] = useState({})
     const[isSubmitting, setIsSubmitting] = useState(false)
+
 
     const handleSubmit = e => {
         e.preventDefault();
@@ -55,14 +58,12 @@ function Form({submitForm}) {
                 throw Error('There`s an error. Check the submitted data.')
             }
             return res.json()
-        })
-        
-        .then(function (response) {
+        }).then(function (response) {
             return response.json()
         }).then(function (response) {
             console.log(response);
         }).catch(err => {
-            setError(err.message)
+            setErrorEnd(err.message)
             console.log(err.message)
         })
     }
@@ -109,7 +110,7 @@ function Form({submitForm}) {
                     <label className="form-label" htmlFor="time">
                         Preparation Time (hh:mm:ss):  
                     </label>
-                    <TimeField value={values.time} onChange={handleChange} showSeconds={true} className="form-input" name="time" style={{width: '100%'}} />
+                    <TimeField value={values.time} onChange={handleChange} showSeconds={true} className="form-input" name="time" style={{width: '50%'}} />
                     {errors.time && <p>{errors.time}</p>}
                 </div>
                 <div className="form-inputs">
@@ -133,17 +134,21 @@ function Form({submitForm}) {
                 <div className="dish-type-fields">
                     <div>
                     <label className="form-label" htmlFor="type">
-                        Number of Slices:
+                        Slices:
                     </label>
                         <input
                             id="no_of_slices"
+                            onKeyPress={(event) => {if (!/[0-9]/.test(event.key)) {event.preventDefault();}}}
+                            onBlur={() => {parseInt(values.noOfSlices)}}
                             type="number"
-                            pattern='[0-9]'
+                            min={1}
+                            max={10}
+                            // pattern='[0-9]'
                             name="noOfSlices" 
                             className="form-input"  
                             placeholder="Number of Slices"
                             onChange={handleChange}
-                            value={values.noOfSlices}
+                            value={Number(values.noOfSlices).toString()}
                             />
                         {errors.noOfSlices && <p>{errors.noOfSlices}</p>}
                         </div>
@@ -153,46 +158,58 @@ function Form({submitForm}) {
                         </label>
                         <input
                             id="diameter"
+                            onKeyPress={(event) => {if (/-/.test(event.key)) {event.preventDefault();}}}
                             type="number"
+                            min={1}
+                            max={50}
                             name="diameter" 
                             className="form-input" 
                             placeholder="Diameter"
                             onChange={handleChange}
-                            value={values.diameter}
+                            value={Number(values.diameter).toString()}
                         /> 
                         {errors.diameter && <p>{errors.diameter}</p>}
                                 </div>
                 </div>
                                 }
                 {values.dishType === "soup" && <div className="dish-type-fields">
+                    <div>
                 <label className="form-label" htmlFor="type">
-                        Spiciness Scale: 
+                        Spiciness: {values.spicinessScale}
                     </label>
+                    <div className="spiciness-scale">
+                    <p>1</p>
                 <input
-                            id="spiciness_scale"
+                            id="spiciness-scale"
                             type="range"
-                            pattern='[0-10]'
+                            min={1}
+                            max={10}
+                            step={1}
                             name="spicinessScale" 
                             className="form-input" 
                             placeholder="Spiciness Scale"
                             onChange={handleChange}
                             value={values.spicinessScale}
-                        /> 
+                        /><p>10</p></div>
                         {errors.spicinessScale && <p>{errors.spicinessScale}</p>}
-                                </div>}
+                                </div> </div>}
                 {values.dishType === "sandwich" && <div className="dish-type-fields">
                 <label className="form-label" htmlFor="type">
                         Slices Of Bread: 
                     </label>
                 <input
                             id="slices_of_bread"
+                            onKeyPress={(event) => {if (!/^[1-9]\d*$/.test(event.key)) {event.preventDefault();}}}
                             type="number"
-                            pattern='[0-10]'
+                            pattern={[0-9]}
+                            step={1}
+                            min={1}
                             name="slicesOfBread" 
                             className="form-input" 
                             placeholder="Slices Of Bread"
                             onChange={handleChange}
                             value={values.slicesOfBread}
+                            required={true}
                         /> 
                         {errors.slicesOfBread && <p>{errors.slicesOfBread}</p>}
                                 </div>}
@@ -202,7 +219,7 @@ function Form({submitForm}) {
                 <button type="submit" className="form-input-btn">
                     Register Now!
                 </button>
-                {error && <div>{ error }</div>}
+                {errorEnd && <div>{ errorEnd }</div>}
             </form>
         </div>
 

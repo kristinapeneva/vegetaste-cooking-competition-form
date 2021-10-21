@@ -22,10 +22,10 @@ function validateInfo(values) {
                 errors.diameter = "Diameter is required"
             }
             if(values.dishType === "soup" && !values.spicinessScale) {
-                errors.diameter = "Spiciness is required"
+                errors.spicinessScale = "Spiciness is required"
             }
             if(values.dishType === "sandwich" && !values.slicesOfBread) {
-                errors.diameter = "SlicesOfBread is required"
+                errors.slicesOfBread = "SlicesOfBread is required"
             }
         }
 

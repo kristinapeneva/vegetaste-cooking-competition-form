@@ -43,16 +43,11 @@ function Form({submitForm}) {
         setErrors(validate(values));
         setIsSubmitting(true)
         console.log(values)
+        const body = prepareRequest()
         fetch('https://frosty-wood-6558.getsandbox.com:443/dishes', {
             method: 'POST',
             headers: {"Accept": 'application/json', "Content-Type": "application/json"},
-            body: JSON.stringify({
-                name: values.dishName,
-                preparation_time: values.time,
-                type: values.dishType,
-                no_of_slices: Number(values.noOfSlices),
-                diameter: Number(values.diameter)
-            })
+            body: JSON.stringify(body)
         }).then(res => {
             if(!res.ok) {
                 throw Error('There`s an error. Check the submitted data.')
@@ -68,6 +63,26 @@ function Form({submitForm}) {
         })
     }
 
+    const prepareRequest = () => {
+        var body = {
+            name: values.dishName,
+            preparation_time: values.time,
+            type: values.dishType
+        }
+        switch(body.type){
+            case "pizza":
+                body.no_of_slices = Number(values.noOfSlices)
+                body.diameter = Number(values.diameter)
+                break;
+            case "soup":
+                body.spiciness_scale  = Number(values.spicinessScale)
+                break;
+            case "sandwich":
+                body.slices_of_bread  = Number(values.slicesOfBread)
+                break;
+        }
+        return body;
+    }
     
 
     useEffect(
@@ -199,16 +214,17 @@ function Form({submitForm}) {
                     </label>
                 <input
                             id="slices_of_bread"
-                            onKeyPress={(event) => {if (!/^[1-9]\d*$/.test(event.key)) {event.preventDefault();}}}
+                            onKeyPress={(event) => {if (!/^[0-9]\d*$/.test(event.key)) {event.preventDefault();}}}
                             type="number"
                             pattern={[0-9]}
                             step={1}
                             min={1}
+                            max={5}
                             name="slicesOfBread" 
                             className="form-input" 
                             placeholder="Slices Of Bread"
                             onChange={handleChange}
-                            value={values.slicesOfBread}
+                            value={Number(values.slicesOfBread).toString()}
                             required={true}
                         /> 
                         {errors.slicesOfBread && <p>{errors.slicesOfBread}</p>}

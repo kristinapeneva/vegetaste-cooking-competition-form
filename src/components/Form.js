@@ -36,30 +36,23 @@ function Form({submitForm}) {
 
     const[errors, setErrors] = useState({})
     const[isSubmitting, setIsSubmitting] = useState(false)
-
+    let isSuccess = false
 
     const handleSubmit = e => {
         e.preventDefault();
         setErrors(validate(values));
         setIsSubmitting(true)
-        console.log(values)
         const body = prepareRequest()
         fetch('https://frosty-wood-6558.getsandbox.com:443/dishes', {
             method: 'POST',
             headers: {"Accept": 'application/json', "Content-Type": "application/json"},
             body: JSON.stringify(body)
-        }).then(res => {
-            if(!res.ok) {
-                throw Error('There`s an error. Check the submitted data.')
-            }
-            return res.json()
-        }).then(function (response) {
-            return response.json()
-        }).then(function (response) {
-            console.log(response);
+        })
+        .then(response => { isSuccess = response.ok; return response.json() })
+        .then(res => {
+            submitForm(isSuccess, res)
         }).catch(err => {
             setErrorEnd(err.message)
-            console.log(err.message)
         })
     }
 
@@ -84,17 +77,6 @@ function Form({submitForm}) {
         return body;
     }
     
-
-    useEffect(
-        () => {
-          if (Object.keys(errors).length === 0 && isSubmitting) {
-            submitForm();
-          }
-        },
-        [errors]
-      );
-
-
     return (
         <div className="wrapper">
             <div className="content-wrapper">

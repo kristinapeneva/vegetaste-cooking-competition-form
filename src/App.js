@@ -7,13 +7,17 @@ import Footer from './components/Footer';
 
 function App() {
   const [isSubmitted, setIsSubmitted] = useState(false)
-  function submitForm() {
+  const [isSuccess, setIsSuccess] = useState(false)
+  const [message, setMessage] = useState()
+  function submitForm(isSuccess, mes) {
     setIsSubmitted(true)
+    setIsSuccess(isSuccess)
+    setMessage(mes)
   }
   return (
     <div className="App">
       <Header />
-      {!isSubmitted ? (<Form submitForm={submitForm}/>) : (<FormSuccess />)}
+      {!isSubmitted ? (<Form submitForm={submitForm}/>) : (<FormSuccess isSuccess={isSuccess} message={message} />)}
       <Footer />      
     </div>
   );

@@ -1,16 +1,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Marck+Script&family=Roboto:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Merriweather&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Stint+Ultra+Condensed&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300&family=Lato&display=swap');
 
 :root {
   --main-color: green;
   --secondary-color: yellow;
-  font-size: calc(0.5em + 1vmin);
 }
 
 body {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Lato', sans-serif;
+  color: #444444;
+  letter-spacing: 0.03em;
+  font-weight: lighter;
 }
 
 *, *::after, *::before{
@@ -35,8 +45,8 @@ body {
   left:0;
   right: 0;
   bottom: 0;
-  background-image: url('./photos/worn-dots.png'), linear-gradient(to left, #008285, #008196, #007fa6, #007bb5, #0075be);
-  mask-image: url('./photos/wave\ \(3\).svg');
+  background-image: url('./photos/worn-dots.png'), linear-gradient(to right top, #99cdce, #95ccd4, #94cbdb, #95c9e0, #99c7e5);;
+  mask-image: url('./photos/wave\ \(1\).svg');
   background-position: right;
 mask-size: cover;
 mask-repeat: no-repeat;
@@ -70,23 +80,54 @@ mask-clip: content-box;
 
 }
 
+
 .form-content {
   width: 400px;
   /* max-width: 640px;
   width: 50%; */
   height: 100%;
+  min-height: 640px;
   position: relative;
   padding: 2em;
-  background: rgba( 255, 255, 255, 0.2);
+  background: rgba( 255,255,255);
   border-radius: 1em;
   /* border-top-right-radius: 1em;
   border-bottom-right-radius: 1em; */
-  border-radius: 1.5em;
-  border: 1px solid rgba( 255, 255, 255, 0.18);
-backdrop-filter: blur( 0px );
+  /* border-radius: 1.5em; */
+  border: 1px solid rgba( 230,244,241, 0.18);
+backdrop-filter: blur( 5px );
 -webkit-backdrop-filter: blur( 0px );
-box-shadow:  5px 5px 10px #206d85,
-             -5px -5px 10px #206f87;
+box-shadow:  5px 5px 10px #206d85;
+             /* -5px -5px 10px #206f87; */
+             /* border: 1px solid #99c7e5; */
+
+}
+
+img {
+  position: absolute;
+  height: 200px;
+  float:right;
+  right: -30%;
+  top:-20%
+}
+
+.form-content:before {
+  position: absolute;
+  content:'';
+  height: 35%;
+  width: 400px;
+  top:0;
+  left:0;
+  right: 0;
+  bottom: 0;
+  background-image: url('./photos/worn-dots.png'), linear-gradient(to right top, #008285, #00828d, #008294, #00829b, #0081a1);;
+  mask-image: url('./photos/wave\ \(1\).svg');
+  background-position: right;
+mask-size: cover;
+mask-repeat: no-repeat;
+mask-position: center;
+mask-clip: content-box;
+border-radius: 1em;
 }
 
 
@@ -118,13 +159,14 @@ box-shadow:  5px 5px 10px #206d85,
 
 .content-wrapper{
   width: 60%;
-  height: 80%;
+  height: 700px;
   min-height: fit-content;
   display: flex;
   /* background: white;
   opacity: 0.4; */
   z-index: 2;
-
+  border-radius: 1em;
+  
 
   /* box-shadow: 1px 1px 20px black; */
 }
@@ -150,15 +192,17 @@ button{
   padding: 0.5em;
   color: white;
   border: none;
-  background-image: linear-gradient(to top, #4d9699, #569b9e, #5fa0a3, #68a6a8, #70abad);
+  background-image: linear-gradient(to right top, #008285, #00828d, #008294, #00829b, #0081a1);;
   box-shadow: 0px 1px 3px black;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 600;
   border-radius: 0.3em;
   transition: all 0.5s;
 }
 
 button:hover{
   cursor: pointer;
-  background-image: linear-gradient(to top, #70abad, #79b0b2, #82b5b7, #8bbbbc, #94c0c1);
+  background-image: linear-gradient(to right top, #008285, #00828d, #008294, #00829b, #0081a1);
   transform: scale(1.02);
 }
 
@@ -168,21 +212,26 @@ button:active{
 }
 
 .form-input {
-  margin-bottom: 1rem;
-  font-size: 1rem;
+  font-size: 1.3em;
   background:none;
-  color: #4d9699;
+  color: #008285;
+  font-weight: lighter;
   border: none;
-  border: solid 1.5px #4d9699;
-  border-radius: 0.3em;
+  border-bottom: solid 3px #008285;
   padding: 0.5em;
 }
 
+.form-inputs {
+  height: 80px;
+  margin-bottom: 1em;
+}
+
 ::placeholder{
-  color: grey;
+  color: #008285;
+  opacity: 0.5;
 }
 .form-input:focus{
-  background-color: rgba(255, 255, 255, 0.6);
+  background-color: #f5faf9;
 
   outline: none;
 }
@@ -199,9 +248,14 @@ button:active{
 }
 
 .text-left h1{
-  font-size: 3rem;
+  font-size: 8rem;
+  color: #E6F4F1;
   position: absolute;
   text-align: left;
+  font-family: 'Bebas Neue', cursive;
+  text-shadow: 1px 2px 7px rgba(164,164,164,0.6);
+  margin: 0;
+  letter-spacing: 0.02em;
 }
 
 .text-left h3{
@@ -212,12 +266,14 @@ button:active{
 }
 
 label {
-  font-weight: bolder;
-  margin-bottom: 0.2em;
+  font-weight: 900;
+  margin-bottom: 0.1em;
+  font-size: 1em;
+  letter-spacing: 0.035em;
 }
 
 .dish-type {
-  /* display: flex; */
+  display: flex;
   justify-content: stretch;
 }
 
@@ -238,4 +294,61 @@ label {
 .spiciness-scale{
   display: flex;
   width: 100%;
+}
+
+.form h1 {
+    color: #E6F4F1;
+    height: 20%;
+    font-family: 'Pacifico', cursive;
+    font-weight: 200;
+}
+
+input[type='radio'] {
+  -webkit-appearance:none;
+  width:20px;
+  height:20px;
+  border:1px solid #008285;
+  border-radius:50%;
+  outline:none;
+  /* box-shadow:0 0 5px 0px gray inset; */
+}
+
+input[type='radio']:hover {
+  box-shadow:0 0 5px 0px #E6F4F1 inset;
+}
+
+input[type='radio']:before {
+  content:'';
+  display:block;
+  width:60%;
+  height:60%;
+  margin: 20% auto;    
+  border-radius:50%;    
+}
+input[type='radio']:checked:before {
+  background:#008285;
+}
+
+input[type='range'] {
+  width: 400px;
+  height: 15px;
+  -webkit-appearance: none;
+  border: 1px solid #008285;
+  outline: none;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #008285;
+  cursor: pointer;
+  border: 4px solid #008285;
+}
+
+.radio-label {
+ color: #008285;
 }

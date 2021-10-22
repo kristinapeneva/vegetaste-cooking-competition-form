@@ -3,6 +3,7 @@ import validate from './validateInfo'
 import TimeFormat from 'hh-mm-ss'
 // import useForm from './useForm';
 import TimeField from 'react-simple-timefield';
+import illustration from '../photos/undraw_Chef_cu0r (1).svg'
 import NumberFormat from 'react-number-format';
 import axios from 'axios'
 import Slider from 'rsuite/Slider';
@@ -99,12 +100,13 @@ function Form({submitForm}) {
             <div className="content-wrapper">
             <div className="photo-left">
                 <div className="text-left">
-                <h1>What are you going to prepare for our judges?</h1>
+                <h1>Final Step!</h1>
                 </div>
             </div>
             <div className="form-content">
             <form className="form" onSubmit={handleSubmit}>
-                <h1>What are you going to prepare for our judges?</h1>
+                <h1>VegeTaste</h1>
+                <img src={illustration} classname="illustration"/>
                 <div className="form-inputs">
                     <label className="form-label" htmlFor="name">
                         Dish Name: 
@@ -124,7 +126,7 @@ function Form({submitForm}) {
                     <label className="form-label" htmlFor="time">
                         Preparation Time (hh:mm:ss):  
                     </label>
-                    <TimeField value={values.time} onChange={handleChange} showSeconds={true} className="form-input" name="time" style={{width: '50%'}} />
+                    <TimeField value={values.time} onChange={handleChange} showSeconds={true} className="form-input" name="time" style={{width: '100%'}} />
                     {errors.time && <p>{errors.time}</p>}
                 </div>
                 <div className="form-inputs">
@@ -133,19 +135,20 @@ function Form({submitForm}) {
                     </label>
                     <div className="dish-type">
                     <div className="dish-type-choice">
-                    <label>
-                        <input type="radio" value="pizza" checked={values.dishType==="pizza"} onChange={handleChange} name="dishType"/><span>Pizza</span>
+                    <label className="radio-label">
+                        <input type="radio" value="pizza" checked={values.dishType==="pizza"} onChange={handleChange} name="dishType" /><span>Pizza</span>
                     </label>
-                    <label>
-                        <input type="radio" value="soup" checked={values.dishType==="soup"} onChange={handleChange} name="dishType" /><span>Soup</span>
+                    <label className="radio-label">
+                        <input type="radio" value="soup" checked={values.dishType==="soup"} onChange={handleChange} name="dishType" checked={values.dishType === "soup" ? true : false }/><span>Soup</span>
                     </label>
-                    <label>
-                        <input type="radio" value="sandwich" checked={values.dishType==="sandwich"} onChange={handleChange} name="dishType" /><span>Sandwich</span>
+                    <label className="radio-label">
+                        <input type="radio" value="sandwich" checked={values.dishType==="sandwich"} onChange={handleChange} name="dishType" checked={values.dishType === "sandwich" ? true : false }/><span>Sandwich</span>
                     </label>
                     {errors.dishType && <p>{errors.dishType}</p>}
                     </div>
                 {values.dishType === "pizza" && 
                 <div className="dish-type-fields">
+                    <div className="form-inputs">
                     <div>
                     <label className="form-label" htmlFor="type">
                         Slices:
@@ -166,6 +169,8 @@ function Form({submitForm}) {
                             />
                         {errors.noOfSlices && <p>{errors.noOfSlices}</p>}
                         </div>
+                        </div>
+                        <div className="form-inputs">
                         <div>
                         <label className="form-label" htmlFor="type">
                         Diameter: 
@@ -184,6 +189,7 @@ function Form({submitForm}) {
                         /> 
                         {errors.diameter && <p>{errors.diameter}</p>}
                                 </div>
+                </div>
                 </div>
                                 }
                 {values.dishType === "soup" && <div className="dish-type-fields">

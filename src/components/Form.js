@@ -32,7 +32,8 @@ function Form({submitForm}) {
         console.log(values.noOfSlices)
     }
 
-    let preparationTime = values.hours*3600 + values.minutes*60 + values.seconds;
+
+
 
     const[errors, setErrors] = useState({})
     const[isSubmitting, setIsSubmitting] = useState(false)
@@ -220,7 +221,6 @@ function Form({submitForm}) {
                 {errorEnd && <div>{ errorEnd }</div>}
             </form>
         </div>
-
         </div>
         </div>
     )

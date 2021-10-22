@@ -92,10 +92,14 @@ function Form({submitForm}) {
     
     return (
         <div className="wrapper">
+            <div classname="background">
+                <div classname="background1"></div>
+                <div classname="background2"></div>
+            </div>
             <div className="content-wrapper">
             <div className="photo-left">
                 <div className="text-left">
-                <h1>VegeTaste</h1>
+                <h1>What are you going to prepare for our judges?</h1>
                 </div>
             </div>
             <div className="form-content">

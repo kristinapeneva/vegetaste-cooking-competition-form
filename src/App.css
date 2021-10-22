@@ -23,39 +23,110 @@ body {
   width: 100vw;
   justify-content: center;
   align-items: center;
-  background-image: url('./photos/worn-dots.png');
-  background-color: #eae7e0;
-}
- 
-
-.form-content {
-  min-width: 320px;
-  max-width: 640px;
-  width: 50%;
-  height: 100%;
-  position: relative;
-  padding: 2em;
   background-color: white;
 }
 
-.photo-left {
-  background: url('./photos/background.jpg');
-  background-size: cover;
+.wrapper:before {
+  position: absolute;
+  content:'';
+  height: 100vh;
+  width: 100vw;
+  top:0;
+  left:0;
+  right: 0;
+  bottom: 0;
+  background-image: url('./photos/worn-dots.png'), linear-gradient(to left, #008285, #008196, #007fa6, #007bb5, #0075be);
+  mask-image: url('./photos/wave\ \(3\).svg');
+  background-position: right;
+mask-size: cover;
+mask-repeat: no-repeat;
+mask-position: center;
+mask-clip: content-box;
+}
+
+/* .wrapper:after {
+  position: absolute;
+  content:'';
+  height: 100vh;
+  width: 100vw;
+  top:0;
+  left:0;
+  right: 0;
+  bottom: 0;
+  background-image: url('./photos/worn-dots.png'),linear-gradient(to right, #94f7b2, #85edb0, #77e4ae, #69daac, #5cd0a9);
+  mask-image: url('./photos/wave\ \(2\).svg');
+mask-size: cover;
+mask-repeat: no-repeat;
+mask-position: center;
+mask-clip: content-box;
+} */
+
+.background{
+  width: 100%;
   height: 100%;
-  flex:1;
+  position: absolute;
+  top: 0;
+  width: 0;
+
+}
+
+.form-content {
+  width: 400px;
+  /* max-width: 640px;
+  width: 50%; */
+  height: 100%;
+  position: relative;
+  padding: 2em;
+  background: rgba( 255, 255, 255, 0.2);
+  border-radius: 1em;
+  /* border-top-right-radius: 1em;
+  border-bottom-right-radius: 1em; */
+  border-radius: 1.5em;
+  border: 1px solid rgba( 255, 255, 255, 0.18);
+backdrop-filter: blur( 0px );
+-webkit-backdrop-filter: blur( 0px );
+box-shadow:  5px 5px 10px #206d85,
+             -5px -5px 10px #206f87;
+}
+
+
+.photo-left {
+  /* background-image: url('./photos/worn-dots.png'), linear-gradient(to left, #50d5b7, #40bea3, #30a88f, #1e927b, #067d68); */
+  width: 50%;
+  height: 100%;
   display: flex;
+  flex:1;
+  position: relative;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  /* justify-content: center; */
+  /* align-items: center; */
   color: black;
+  /* background-image: linear-gradient(to left, rgba(80,213,183, 0.7), rgba(64,190,163, 0.8), rgba(48,168,143, 0.7), rgba(30,146,123, 0.8), rgba(6,125,104, 0.9)), url('./photos/background.jpg'); */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  /* background: rgba( 255, 255, 255, 0.1); */
+  border-top-left-radius: 1em;
+  border-bottom-left-radius: 1em;
+  /* opacity: 0; */
+  /* mask-image: url('./photos/blob\ \(3\).svg');
+  mask-size: cover;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-clip: content-box; */
 }
 
 .content-wrapper{
-  width: 80%;
+  width: 60%;
   height: 80%;
   min-height: fit-content;
   display: flex;
-  box-shadow: 1px 1px 20px black;
+  /* background: white;
+  opacity: 0.4; */
+  z-index: 2;
+
+
+  /* box-shadow: 1px 1px 20px black; */
 }
 
 label, .form-input {
@@ -121,17 +192,16 @@ button:active{
 }
 
 .text-left{
-  background-color: rgba(0, 0, 0, 0.4);  
-  backdrop-filter: blur(5px);
+  /* background-color: rgba(0, 0, 0, 0.4);  
+  backdrop-filter: blur(5px); */
   padding: 1.5em;
   width: 100%;
 }
 
 .text-left h1{
-  font-family: 'Marck Script', cursive;
-  color: #fbc11a;
   font-size: 3rem;
-  text-decoration: underline;
+  position: absolute;
+  text-align: left;
 }
 
 .text-left h3{

@@ -29,9 +29,8 @@ function Form({submitForm}) {
             ...values,
             [name]: value
         })
-        console.log(values.noOfSlices)
+        
     }
-
 
 
 
@@ -42,7 +41,10 @@ function Form({submitForm}) {
     const handleSubmit = e => {
         e.preventDefault();
         setErrors(validate(values));
-        setIsSubmitting(true)
+        setIsSubmitting(true);
+    }
+
+    const submit = () => {
         const body = prepareRequest()
         fetch('https://frosty-wood-6558.getsandbox.com:443/dishes', {
             method: 'POST',
@@ -52,10 +54,20 @@ function Form({submitForm}) {
         .then(response => { isSuccess = response.ok; return response.json() })
         .then(res => {
             submitForm(isSuccess, res)
+            console.log(res)
         }).catch(err => {
             setErrorEnd(err.message)
         })
     }
+
+    useEffect(
+        () => {
+          if (Object.keys(errors).length === 0 && isSubmitting) {
+            submit();
+          }
+        },
+        [errors]
+      );
 
     const prepareRequest = () => {
         var body = {

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import validate from './validateInfo';
 import TimeField from 'react-simple-timefield';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCarrot, faArrowRight} from '@fortawesome/free-solid-svg-icons'
 
 
 function Form({submitForm}) {
@@ -11,10 +13,10 @@ function Form({submitForm}) {
         minutes: 0,
         seconds: 0,
         dishType: '',
-        noOfSlices: 1,
-        diameter: 1,
-        spicinessScale: 1,
-        slicesOfBread: 1
+        noOfSlices: 8,
+        diameter: 15,
+        spicinessScale: 5,
+        slicesOfBread: 2
     })
 
     const [errorEnd, setErrorEnd] = useState(null)
@@ -86,16 +88,16 @@ function Form({submitForm}) {
         <div className="wrapper">
             <div className="form-content">
             <form className="form" onSubmit={handleSubmit}>
-                <h1>VegeTaste</h1>
+                <h1>VegeTaste <FontAwesomeIcon icon={faCarrot} /></h1>
 
             {/* Dish Name Field */}
                 <div className="form-inputs">
-                    <label className="form-label" htmlFor="name">Dish Name:</label>
+                    <label className="label-dish-name" htmlFor="name">Dish Name:</label>
                     <input
                         id="dish-name"
                         type="text"
                         name="dishName" 
-                        className="input" 
+                        className="input input-dish-name" 
                         placeholder="Enter dish name..."
                         onChange={handleChange}
                         value={values.dishName}
@@ -105,11 +107,11 @@ function Form({submitForm}) {
 
             {/* Preparation Time Field */}
                 <div className="form-inputs">
-                    <label className="label" htmlFor="time">Preparation Time (hh:mm:ss):</label>
+                    <label className="label-prep-time" htmlFor="time">Preparation Time (hh:mm:ss):</label>
                     <TimeField value={values.time}
                     onChange={handleChange}
                     showSeconds={true}
-                    className="input"
+                    className="input input-prep-time"
                     name="time" 
                     style={{width: '100%'}} />
                     {errors.time && <p>{errors.time}</p>}
@@ -117,10 +119,10 @@ function Form({submitForm}) {
 
             {/* Dish Type Field */}
                 <div className="form-inputs">
-                    <label className="form-label" htmlFor="type">Dish Type:</label>                    
+                    <label className="label-dish-type" htmlFor="type">Dish Type:</label>                    
                     <div className="dish-type">
                         <div className="dish-type-choice">
-                            <label className="radio-label">
+                            <label className="radio-label label-pizza">
                                 <input 
                                 type="radio" 
                                 value="pizza" 
@@ -130,7 +132,7 @@ function Form({submitForm}) {
                                 />
                                 <span>Pizza</span>
                             </label>
-                            <label className="radio-label">
+                            <label className="radio-label label-soup">
                                 <input
                                 type="radio"
                                 value="soup"
@@ -141,7 +143,7 @@ function Form({submitForm}) {
                                 />
                                 <span>Soup</span>
                             </label>
-                            <label className="radio-label">
+                            <label className="radio-label label-sandwich">
                                 <input
                                 type="radio"
                                 value="sandwich"
@@ -162,7 +164,7 @@ function Form({submitForm}) {
                 {values.dishType === "pizza" && 
                 <div className="dish-type-fields">
                     <div className="form-inputs">
-                        <label className="form-label" htmlFor="type">Slices:</label>
+                        <label className="label-no-of-slices" htmlFor="type">Slices:</label>
                         <input
                             id="no_of_slices"
                             onKeyPress={(event) => {if (!/[0-9]/.test(event.key)) {event.preventDefault();}}}
@@ -171,7 +173,7 @@ function Form({submitForm}) {
                             min={1}
                             max={10}
                             name="noOfSlices" 
-                            className="input"  
+                            className="input input-no-of-slices"  
                             placeholder="Number of Slices"
                             onChange={handleChange}
                             value={Number(values.noOfSlices).toString()}
@@ -179,15 +181,15 @@ function Form({submitForm}) {
                         {errors.noOfSlices && <p>{errors.noOfSlices}</p>}
                     </div>
                     <div className="form-inputs">
-                        <label className="form-label" htmlFor="type">Diameter:</label>
+                        <label className="label-diameter" htmlFor="type">Diameter (cm):</label>
                         <input
                             id="diameter"
                             onKeyPress={(event) => {if (/-/.test(event.key)) {event.preventDefault();}}}
                             type="number"
-                            min={1}
+                            min={15}
                             max={50}
                             name="diameter" 
-                            className="input" 
+                            className="input input-diameter" 
                             placeholder="Diameter"
                             onChange={handleChange}
                             value={Number(values.diameter).toString()}
@@ -200,9 +202,9 @@ function Form({submitForm}) {
             {/* Soup */}
                 {values.dishType === "soup" &&
                 <div className="dish-type-fields">
-                    <label className="form-label" htmlFor="type">Spiciness: {values.spicinessScale}</label>
+                    <label className="label-spiciness" htmlFor="type">Spiciness: {values.spicinessScale}</label>
                     <div className="spiciness-scale">
-                        <h4>1</h4>
+                        <h4 className="input-spiciness" >1</h4>
                         <input
                             id="spiciness-scale"
                             type="range"
@@ -210,11 +212,11 @@ function Form({submitForm}) {
                             max={10}
                             step={1}
                             name="spicinessScale" 
-                            className="input" 
+                            className="input input-spiciness" 
                             onChange={handleChange}
                             value={values.spicinessScale}
                         />
-                        <h4>10</h4>
+                        <h4 className="input-spiciness">10</h4>
                     </div>
                     {errors.spicinessScale && <p>{errors.spicinessScale}</p>}
                 </div>
@@ -223,7 +225,7 @@ function Form({submitForm}) {
             {/* Sandwich */}
                 {values.dishType === "sandwich" &&
                 <div className="dish-type-fields">
-                    <label className="form-label" htmlFor="type">Slices Of Bread:</label>
+                    <label className="label-slices-bread" htmlFor="type">Slices Of Bread:</label>
                     <input
                         id="slices_of_bread"
                         onKeyPress={(event) => {if (!/^[0-9]\d*$/.test(event.key)) {event.preventDefault();}}}
@@ -231,13 +233,12 @@ function Form({submitForm}) {
                         pattern={[0-9]}
                         step={1}
                         min={1}
-                        max={5}
+                        max={6}
                         name="slicesOfBread" 
-                        className="input" 
+                        className="input input-slices-bread" 
                         placeholder="Slices Of Bread"
                         onChange={handleChange}
                         value={Number(values.slicesOfBread).toString()}
-                        required={true}
                     /> 
                     {errors.slicesOfBread && <p>{errors.slicesOfBread}</p>}
                 </div>
@@ -245,7 +246,7 @@ function Form({submitForm}) {
             </div>
         </div>
         {errorEnd && <div>{ errorEnd }</div>}
-        <button type="submit" className="form-input-btn">Register Now!</button>
+        <button type="submit" className="form-input-btn">Register Now <FontAwesomeIcon icon={faArrowRight} /></button>
                
             </form>
         </div>

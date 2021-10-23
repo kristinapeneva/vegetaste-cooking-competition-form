@@ -59,6 +59,8 @@ body {
   mask-repeat: no-repeat;
   mask-position: center;
   mask-clip: content-box;
+
+  animation: wrapper-start 1.5s ease-in;
 }
 
 /* Form Layout*/
@@ -201,6 +203,10 @@ input[type='radio']:checked:before {
   background:var(--green);
 }
 
+input[type='radio']:checked + span {
+  font-weight: 900;
+}
+
 input[type='range'] {
   width: 400px;
   height: 15px;
@@ -221,12 +227,13 @@ input[type='range']::-webkit-slider-thumb {
   border: 4px solid var(--green);
 }
 
-.radio-label {
+span {
  color: var(--green);
+ font-weight: 400;
 }
 
 p {
-  color: red;
+  color: #FF8847;
   margin-top:0.1em;
 }
 
@@ -247,15 +254,82 @@ button {
   box-shadow: 1px 1px 4px var(--light-grey);
   border: none;
   border-radius: 0.5em;
+  transition: all 0.5s ease-out;
 }
 
 button:hover {
   cursor: pointer;
   background-image: linear-gradient(to right, #198e91, #1b919a, #2094a3, #2897ab, #329ab3);
-  transform: scale(1.02);
 }
 
 button:active {
   box-shadow: inset 0px 1px 3px var(--color-dark-text);
-  transform: scale(1.02);
+}
+
+
+/* Animations */
+
+@keyframes wrapper-start {
+  0% {
+    transform: translateY(-700px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes elements-start {
+  0% {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.label-dish-name, .input-dish-name, .label-prep-time, .input-prep-time, .label-dish-type, .label-pizza, .label-soup, .label-sandwich, .form-content, .form-content::before, button {
+  animation: elements-start 1s ease-out forwards;
+  opacity: 0;
+}
+
+.label-dish-name {
+  animation-delay: 0.1s;
+}
+
+.input-dish-name {
+  animation-delay: 0.2s;
+}
+
+.label-prep-time {
+  animation-delay: 0.3s;
+}
+
+.input-prep-time {
+  animation-delay: 0.4s;
+}
+
+.label-dish-type {
+  animation-delay: 0.5s;
+}
+
+.label-pizza {
+  animation-delay: 0.6s;
+}
+
+.label-soup {
+  animation-delay: 0.7s;
+}
+
+.label-sandwich {
+  animation-delay: 0.8s;
+}
+
+button {
+  animation-delay: 0.8s;
 }

@@ -1,7 +1,7 @@
 # Registration Form for Vege Battle (Vegan Cooking Competition)
-## Gatehring Data for the Dish
+## Gathering Data for the Dish
 
-Disclaimer: This project has been worked as a part of recruitment process for a Frontend (React) Engineer position.
+Disclaimer: This project has been worked as a part of the recruitment process for a Frontend (React) Engineer position.
 
 
 ### Requirements of the recruiter:

@@ -1,11 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Marck+Script&family=Roboto:wght@300&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Merriweather&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Stint+Ultra+Condensed&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300&family=Lato&display=swap');
 
 :root {
@@ -340,7 +333,7 @@ button {
 
 @media (max-width: 768px) and (orientation: portrait) {
   :root{
-    font-size: clac(0.5em + 1vw);
+    font-size: calc(0.5em + 1vw);
   }
   .form-content {
     width: 100%;
@@ -362,4 +355,15 @@ button {
     align-items:flex-start;
     padding: 1rem;
   }
+}
+
+/* Form Success */
+
+.form-success{
+  font-family: 'Lato', sans-serif;
+  color: var(--color-dark-text);
+  z-index: 2;
+  font-size: 1.5rem;
+  font-weight: 600;
+  padding: 1rem;
 }

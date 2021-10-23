@@ -88,7 +88,7 @@ function Form({submitForm}) {
         <div className="wrapper">
             <div className="form-content">
             <form className="form" onSubmit={handleSubmit}>
-                <h1>VegeTaste <FontAwesomeIcon icon={faCarrot} /></h1>
+                <h1>Vege <FontAwesomeIcon icon={faCarrot} /> Battle</h1>
 
             {/* Dish Name Field */}
                 <div className="form-inputs">

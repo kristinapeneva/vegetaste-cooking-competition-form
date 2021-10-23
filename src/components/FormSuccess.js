@@ -1,4 +1,6 @@
 import React from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCheckCircle, faTimesCircle} from '@fortawesome/free-solid-svg-icons'
 
 function extractErrorMessage(message){
     if (message) {
@@ -17,9 +19,9 @@ const FormSuccess = ({isSuccess, message}) => {
 
     return (
 
-        <div className="form-content-right">
-            {!isSuccess ? <div className="form-success">{extractErrorMessage(messages)}</div>
-                     : <div className="form-success"> We have recived your request!</div>
+        <div className="wrapper">
+            {!isSuccess ? <div className="form-success">{extractErrorMessage(messages)} <FontAwesomeIcon icon={faTimesCircle} /></div>
+                     : <div className="form-success">Your registration is complete. <FontAwesomeIcon icon={faCheckCircle} /></div>
             }
         </div>
     )

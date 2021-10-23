@@ -9,8 +9,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300&family=Lato&display=swap');
 
 :root {
-  --main-color: green;
-  --secondary-color: yellow;
+  --green: #008285;
+  --blue: #0081a1;
+  --color-dark-text: #444444;
+  --light-color: #ffffff;
+  --light-grey: #95B0B1;
+  --light-green: #d5e6e0;
 }
 
 body {
@@ -18,26 +22,28 @@ body {
   padding: 0;
   margin: 0;
   font-family: 'Lato', sans-serif;
-  color: #444444;
+  color: var(--color-dark-text);
   letter-spacing: 0.03em;
   font-weight: lighter;
+  overflow-x: hidden;
 }
 
-*, *::after, *::before{
+*, *::after, *::before {
   box-sizing: border-box;
 }
 
+/* Background */
+
 .wrapper {
-  display: flex;
   height: 100vh;
   width: 100vw;
+  display: flex;
   justify-content: center;
   align-items: center;
-  background-color: white;
+  background-color: var(--light-color);
 }
 
 .wrapper:before {
-  position: absolute;
   content:'';
   height: 100vh;
   width: 100vw;
@@ -45,135 +51,46 @@ body {
   left:0;
   right: 0;
   bottom: 0;
-  background-image: url('./photos/worn-dots.png'), linear-gradient(to right top, #99cdce, #95ccd4, #94cbdb, #95c9e0, #99c7e5);;
+  position: absolute;
+  background-image: url('./photos/worn-dots.png'), linear-gradient(to right, #d5e6e0, #d9eae4, #ddede9, #e2f1ed, #e6f4f1);
   mask-image: url('./photos/wave\ \(1\).svg');
   background-position: right;
-mask-size: cover;
-mask-repeat: no-repeat;
-mask-position: center;
-mask-clip: content-box;
-}
-
-/* .wrapper:after {
-  position: absolute;
-  content:'';
-  height: 100vh;
-  width: 100vw;
-  top:0;
-  left:0;
-  right: 0;
-  bottom: 0;
-  background-image: url('./photos/worn-dots.png'),linear-gradient(to right, #94f7b2, #85edb0, #77e4ae, #69daac, #5cd0a9);
-  mask-image: url('./photos/wave\ \(2\).svg');
-mask-size: cover;
-mask-repeat: no-repeat;
-mask-position: center;
-mask-clip: content-box;
-} */
-
-.background{
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  width: 0;
-
-}
-
-
-.form-content {
-  width: 400px;
-  /* max-width: 640px;
-  width: 50%; */
-  height: 100%;
-  min-height: 640px;
-  position: relative;
-  padding: 2em;
-  background: rgba( 255,255,255);
-  border-radius: 1em;
-  /* border-top-right-radius: 1em;
-  border-bottom-right-radius: 1em; */
-  /* border-radius: 1.5em; */
-  border: 1px solid rgba( 230,244,241, 0.18);
-backdrop-filter: blur( 5px );
--webkit-backdrop-filter: blur( 0px );
-box-shadow:  5px 5px 10px #206d85;
-             /* -5px -5px 10px #206f87; */
-             /* border: 1px solid #99c7e5; */
-
-}
-
-img {
-  position: absolute;
-  height: 200px;
-  float:right;
-  right: -30%;
-  top:-20%
-}
-
-.form-content:before {
-  position: absolute;
-  content:'';
-  height: 35%;
-  width: 400px;
-  top:0;
-  left:0;
-  right: 0;
-  bottom: 0;
-  background-image: url('./photos/worn-dots.png'), linear-gradient(to right top, #008285, #00828d, #008294, #00829b, #0081a1);;
-  mask-image: url('./photos/wave\ \(1\).svg');
-  background-position: right;
-mask-size: cover;
-mask-repeat: no-repeat;
-mask-position: center;
-mask-clip: content-box;
-border-radius: 1em;
-}
-
-
-.photo-left {
-  /* background-image: url('./photos/worn-dots.png'), linear-gradient(to left, #50d5b7, #40bea3, #30a88f, #1e927b, #067d68); */
-  width: 50%;
-  height: 100%;
-  display: flex;
-  flex:1;
-  position: relative;
-  flex-direction: column;
-  /* justify-content: center; */
-  /* align-items: center; */
-  color: black;
-  /* background-image: linear-gradient(to left, rgba(80,213,183, 0.7), rgba(64,190,163, 0.8), rgba(48,168,143, 0.7), rgba(30,146,123, 0.8), rgba(6,125,104, 0.9)), url('./photos/background.jpg'); */
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  /* background: rgba( 255, 255, 255, 0.1); */
-  border-top-left-radius: 1em;
-  border-bottom-left-radius: 1em;
-  /* opacity: 0; */
-  /* mask-image: url('./photos/blob\ \(3\).svg');
   mask-size: cover;
   mask-repeat: no-repeat;
   mask-position: center;
-  mask-clip: content-box; */
+  mask-clip: content-box;
 }
 
-.content-wrapper{
-  width: 60%;
-  height: 700px;
-  min-height: fit-content;
-  display: flex;
-  /* background: white;
-  opacity: 0.4; */
-  z-index: 2;
-  border-radius: 1em;
-  
+/* Form Layout*/
 
-  /* box-shadow: 1px 1px 20px black; */
+.form-content {
+  position: relative;
+  width: 400px;
+  height: 85%;
+  min-height: 640px;
+  padding: 2em;
+  border-radius: 2em;
+  border: 1px solid rgba(149,176,177, 0.18);  
+  background: var(--light-color);  
+  box-shadow:  5px 5px 10px var(--light-grey);
 }
 
-label, .form-input {
-  display: block;
+.form-content:before {
+  content:'';
+  height: 30%;
+  min-height: 160px;
   width: 100%;
+  top:0;
+  left:0;
+  position: absolute;
+  background-image: url('./photos/worn-dots.png'), linear-gradient(to right, #008285, #00828d, #008294, #00829b, #0081a1);
+  mask-image: url('./photos/wave\ \(1\).svg');
+  background-position: right;
+  mask-size: cover;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-clip: content-box;
+  border-radius: 2em;
 }
 
 .form {
@@ -183,93 +100,58 @@ label, .form-input {
   flex-direction: column;
 }
 
-button{
-  position: absolute;
-  bottom: 0;
-  align-self: flex-start;
+/* --- Form Elements --- */
+
+/* Top Part */
+
+h1 {
+  color: var(--light-color);
+  height: 20%;
+  font-family: 'Pacifico', cursive;
+  font-weight: 200;
+}
+
+/* Inputs */
+
+.form-inputs{
+  height: 20%;
+  min-height: 80px;
+}
+
+label {
+  display: block;
   width: 100%;
-  font-size: 1.5em;
-  padding: 0.5em;
-  color: white;
-  border: none;
-  background-image: linear-gradient(to right top, #008285, #00828d, #008294, #00829b, #0081a1);;
-  box-shadow: 0px 1px 3px black;
-  font-family: 'Source Sans Pro', sans-serif;
   font-weight: 600;
-  border-radius: 0.3em;
-  transition: all 0.5s;
+  margin-bottom: 0.1em;
+  font-size: 1em;
+  letter-spacing: 0.035em;
 }
 
-button:hover{
-  cursor: pointer;
-  background-image: linear-gradient(to right top, #008285, #00828d, #008294, #00829b, #0081a1);
-  transform: scale(1.02);
-}
-
-button:active{
-  box-shadow: inset 0px 1px 3px black;
-  transform: scale(1.02);
-}
-
-.form-input {
-  font-size: 1.3em;
-  background:none;
-  color: #008285;
-  font-weight: lighter;
+.input {
+  display: block;
+  width: 100%;
+  background: none;
+  font-size: 1.5em;
   border: none;
-  border-bottom: solid 3px #008285;
-  padding: 0.5em;
-}
-
-.form-inputs {
-  height: 80px;
-  margin-bottom: 1em;
+  padding: 0.2em 0;
+  color: var(--green);
+  font-weight: 500;  
+  border-bottom: solid 3px var(--green);  
+  outline: none;
 }
 
 ::placeholder{
-  color: #008285;
+  color: var(--green);
   opacity: 0.5;
 }
-.form-input:focus{
-  background-color: #f5faf9;
 
+.form-input:focus{
+  background-color: var(--light-green);
   outline: none;
 }
 
 .form.input:focus::placeholder{
   color: transparent;
-}
-
-.text-left{
-  /* background-color: rgba(0, 0, 0, 0.4);  
-  backdrop-filter: blur(5px); */
-  padding: 1.5em;
-  width: 100%;
-}
-
-.text-left h1{
-  font-size: 8rem;
-  color: #E6F4F1;
-  position: absolute;
-  text-align: left;
-  font-family: 'Bebas Neue', cursive;
-  text-shadow: 1px 2px 7px rgba(164,164,164,0.6);
-  margin: 0;
-  letter-spacing: 0.02em;
-}
-
-.text-left h3{
-  font-family: 'Roboto', sans-serif;
-  color: white;
-  letter-spacing: 0.05em;
-  font-weight: lighter;
-}
-
-label {
-  font-weight: 900;
-  margin-bottom: 0.1em;
-  font-size: 1em;
-  letter-spacing: 0.035em;
 }
 
 .dish-type {
@@ -285,55 +167,45 @@ label {
 
 .dish-type-fields{
   width: 50%;
-  /* display: flex; */
-  justify-content: last baseline;
   gap: 10%;
 }
-
 
 .spiciness-scale{
   display: flex;
   width: 100%;
 }
 
-.form h1 {
-    color: #E6F4F1;
-    height: 20%;
-    font-family: 'Pacifico', cursive;
-    font-weight: 200;
-}
-
 input[type='radio'] {
   -webkit-appearance:none;
   width:20px;
   height:20px;
-  border:1px solid #008285;
+  border:1px solid var(--green);
   border-radius:50%;
   outline:none;
-  /* box-shadow:0 0 5px 0px gray inset; */
 }
 
 input[type='radio']:hover {
-  box-shadow:0 0 5px 0px #E6F4F1 inset;
+  box-shadow:0 0 5px 0px var(--light-grey) inset;
 }
 
 input[type='radio']:before {
   content:'';
-  display:block;
-  width:60%;
+  display: block;
+  width: 60%;
   height:60%;
   margin: 20% auto;    
-  border-radius:50%;    
+  border-radius: 50%;    
 }
+
 input[type='radio']:checked:before {
-  background:#008285;
+  background:var(--green);
 }
 
 input[type='range'] {
   width: 400px;
   height: 15px;
   -webkit-appearance: none;
-  border: 1px solid #008285;
+  border: 1px solid var(--green);
   outline: none;
   border-radius: 15px;
   overflow: hidden;
@@ -344,11 +216,46 @@ input[type='range']::-webkit-slider-thumb {
   width: 15px;
   height: 15px;
   border-radius: 50%;
-  background: #008285;
+  background: var(--green);
   cursor: pointer;
-  border: 4px solid #008285;
+  border: 4px solid var(--green);
 }
 
 .radio-label {
- color: #008285;
+ color: var(--green);
+}
+
+p {
+  color: red;
+  margin-top:0.1em;
+}
+
+
+/* Submit Button */
+
+button {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  font-size: 1.5em;
+  font-family: 'Lato', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: var(--light-color);
+  padding: 0.5em;
+  background-image: linear-gradient(to right, #008285, #00828d, #008294, #00829b, #0081a1);
+  box-shadow: 1px 1px 4px var(--light-grey);
+  border: none;
+  border-radius: 0.5em;
+}
+
+button:hover {
+  cursor: pointer;
+  background-image: linear-gradient(to right, #198e91, #1b919a, #2094a3, #2897ab, #329ab3);
+  transform: scale(1.02);
+}
+
+button:active {
+  box-shadow: inset 0px 1px 3px var(--color-dark-text);
+  transform: scale(1.02);
 }

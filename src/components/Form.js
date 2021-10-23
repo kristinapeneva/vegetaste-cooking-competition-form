@@ -1,12 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import validate from './validateInfo'
-import TimeFormat from 'hh-mm-ss'
-// import useForm from './useForm';
+import validate from './validateInfo';
 import TimeField from 'react-simple-timefield';
-import illustration from '../photos/undraw_Chef_cu0r (1).svg'
-import NumberFormat from 'react-number-format';
-import axios from 'axios'
-import Slider from 'rsuite/Slider';
 
 
 function Form({submitForm}) {
@@ -29,11 +23,8 @@ function Form({submitForm}) {
         setValues ({
             ...values,
             [name]: value
-        })
-        
+        })        
     }
-
-
 
     const[errors, setErrors] = useState({})
     const[isSubmitting, setIsSubmitting] = useState(false)
@@ -93,66 +84,85 @@ function Form({submitForm}) {
     
     return (
         <div className="wrapper">
-            <div classname="background">
-                <div classname="background1"></div>
-                <div classname="background2"></div>
-            </div>
-            <div className="content-wrapper">
-            <div className="photo-left">
-                <div className="text-left">
-                <h1>Final Step!</h1>
-                </div>
-            </div>
             <div className="form-content">
             <form className="form" onSubmit={handleSubmit}>
                 <h1>VegeTaste</h1>
-                <img src={illustration} classname="illustration"/>
+
+            {/* Dish Name Field */}
                 <div className="form-inputs">
-                    <label className="form-label" htmlFor="name">
-                        Dish Name: 
-                    </label>
+                    <label className="form-label" htmlFor="name">Dish Name:</label>
                     <input
                         id="dish-name"
                         type="text"
                         name="dishName" 
-                        className="form-input" 
+                        className="input" 
                         placeholder="Enter dish name..."
                         onChange={handleChange}
                         value={values.dishName}
                     />
                     {errors.dishName && <p>{errors.dishName}</p>}
                 </div>
+
+            {/* Preparation Time Field */}
                 <div className="form-inputs">
-                    <label className="form-label" htmlFor="time">
-                        Preparation Time (hh:mm:ss):  
-                    </label>
-                    <TimeField value={values.time} onChange={handleChange} showSeconds={true} className="form-input" name="time" style={{width: '100%'}} />
+                    <label className="label" htmlFor="time">Preparation Time (hh:mm:ss):</label>
+                    <TimeField value={values.time}
+                    onChange={handleChange}
+                    showSeconds={true}
+                    className="input"
+                    name="time" 
+                    style={{width: '100%'}} />
                     {errors.time && <p>{errors.time}</p>}
                 </div>
+
+            {/* Dish Type Field */}
                 <div className="form-inputs">
-                <label className="form-label" htmlFor="type">
-                        Dish Type:
-                    </label>
+                    <label className="form-label" htmlFor="type">Dish Type:</label>                    
                     <div className="dish-type">
-                    <div className="dish-type-choice">
-                    <label className="radio-label">
-                        <input type="radio" value="pizza" checked={values.dishType==="pizza"} onChange={handleChange} name="dishType" /><span>Pizza</span>
-                    </label>
-                    <label className="radio-label">
-                        <input type="radio" value="soup" checked={values.dishType==="soup"} onChange={handleChange} name="dishType" checked={values.dishType === "soup" ? true : false }/><span>Soup</span>
-                    </label>
-                    <label className="radio-label">
-                        <input type="radio" value="sandwich" checked={values.dishType==="sandwich"} onChange={handleChange} name="dishType" checked={values.dishType === "sandwich" ? true : false }/><span>Sandwich</span>
-                    </label>
-                    {errors.dishType && <p>{errors.dishType}</p>}
+                        <div className="dish-type-choice">
+                            <label className="radio-label">
+                                <input 
+                                type="radio" 
+                                value="pizza" 
+                                checked={values.dishType==="pizza"}
+                                onChange={handleChange} 
+                                name="dishType"
+                                />
+                                <span>Pizza</span>
+                            </label>
+                            <label className="radio-label">
+                                <input
+                                type="radio"
+                                value="soup"
+                                checked={values.dishType==="soup"}
+                                onChange={handleChange}
+                                name="dishType"
+                                checked={values.dishType === "soup"}
+                                />
+                                <span>Soup</span>
+                            </label>
+                            <label className="radio-label">
+                                <input
+                                type="radio"
+                                value="sandwich"
+                                checked={values.dishType==="sandwich"}
+                                onChange={handleChange}
+                                name="dishType"
+                                checked={values.dishType === "sandwich"}
+                                />
+                                <span>Sandwich</span>
+                            </label>
+                        {errors.dishType && <p>{errors.dishType}</p>}
                     </div>
+
+
+            {/* --- Additional Fileds ---*/}
+
+            {/* Pizza */}
                 {values.dishType === "pizza" && 
                 <div className="dish-type-fields">
                     <div className="form-inputs">
-                    <div>
-                    <label className="form-label" htmlFor="type">
-                        Slices:
-                    </label>
+                        <label className="form-label" htmlFor="type">Slices:</label>
                         <input
                             id="no_of_slices"
                             onKeyPress={(event) => {if (!/[0-9]/.test(event.key)) {event.preventDefault();}}}
@@ -160,21 +170,16 @@ function Form({submitForm}) {
                             type="number"
                             min={1}
                             max={10}
-                            // pattern='[0-9]'
                             name="noOfSlices" 
-                            className="form-input"  
+                            className="input"  
                             placeholder="Number of Slices"
                             onChange={handleChange}
                             value={Number(values.noOfSlices).toString()}
-                            />
+                        />
                         {errors.noOfSlices && <p>{errors.noOfSlices}</p>}
-                        </div>
-                        </div>
-                        <div className="form-inputs">
-                        <div>
-                        <label className="form-label" htmlFor="type">
-                        Diameter: 
-                        </label>
+                    </div>
+                    <div className="form-inputs">
+                        <label className="form-label" htmlFor="type">Diameter:</label>
                         <input
                             id="diameter"
                             onKeyPress={(event) => {if (/-/.test(event.key)) {event.preventDefault();}}}
@@ -182,69 +187,69 @@ function Form({submitForm}) {
                             min={1}
                             max={50}
                             name="diameter" 
-                            className="form-input" 
+                            className="input" 
                             placeholder="Diameter"
                             onChange={handleChange}
                             value={Number(values.diameter).toString()}
                         /> 
                         {errors.diameter && <p>{errors.diameter}</p>}
-                                </div>
+                    </div>
                 </div>
-                </div>
-                                }
-                {values.dishType === "soup" && <div className="dish-type-fields">
-                    <div>
-                <label className="form-label" htmlFor="type">
-                        Spiciness: {values.spicinessScale}
-                    </label>
+                }
+            
+            {/* Soup */}
+                {values.dishType === "soup" &&
+                <div className="dish-type-fields">
+                    <label className="form-label" htmlFor="type">Spiciness: {values.spicinessScale}</label>
                     <div className="spiciness-scale">
-                    <p>1</p>
-                <input
+                        <h4>1</h4>
+                        <input
                             id="spiciness-scale"
                             type="range"
                             min={1}
                             max={10}
                             step={1}
                             name="spicinessScale" 
-                            className="form-input" 
-                            placeholder="Spiciness Scale"
+                            className="input" 
                             onChange={handleChange}
                             value={values.spicinessScale}
-                        /><p>10</p></div>
-                        {errors.spicinessScale && <p>{errors.spicinessScale}</p>}
-                                </div> </div>}
-                {values.dishType === "sandwich" && <div className="dish-type-fields">
-                <label className="form-label" htmlFor="type">
-                        Slices Of Bread: 
-                    </label>
-                <input
-                            id="slices_of_bread"
-                            onKeyPress={(event) => {if (!/^[0-9]\d*$/.test(event.key)) {event.preventDefault();}}}
-                            type="number"
-                            pattern={[0-9]}
-                            step={1}
-                            min={1}
-                            max={5}
-                            name="slicesOfBread" 
-                            className="form-input" 
-                            placeholder="Slices Of Bread"
-                            onChange={handleChange}
-                            value={Number(values.slicesOfBread).toString()}
-                            required={true}
-                        /> 
-                        {errors.slicesOfBread && <p>{errors.slicesOfBread}</p>}
-                                </div>}
+                        />
+                        <h4>10</h4>
+                    </div>
+                    {errors.spicinessScale && <p>{errors.spicinessScale}</p>}
                 </div>
+                }
+            
+            {/* Sandwich */}
+                {values.dishType === "sandwich" &&
+                <div className="dish-type-fields">
+                    <label className="form-label" htmlFor="type">Slices Of Bread:</label>
+                    <input
+                        id="slices_of_bread"
+                        onKeyPress={(event) => {if (!/^[0-9]\d*$/.test(event.key)) {event.preventDefault();}}}
+                        type="number"
+                        pattern={[0-9]}
+                        step={1}
+                        min={1}
+                        max={5}
+                        name="slicesOfBread" 
+                        className="input" 
+                        placeholder="Slices Of Bread"
+                        onChange={handleChange}
+                        value={Number(values.slicesOfBread).toString()}
+                        required={true}
+                    /> 
+                    {errors.slicesOfBread && <p>{errors.slicesOfBread}</p>}
                 </div>
-                
-                <button type="submit" className="form-input-btn">
-                    Register Now!
-                </button>
-                {errorEnd && <div>{ errorEnd }</div>}
+                }
+            </div>
+        </div>
+        {errorEnd && <div>{ errorEnd }</div>}
+        <button type="submit" className="form-input-btn">Register Now!</button>
+               
             </form>
         </div>
-        </div>
-        </div>
+    </div>
     )
 }
 

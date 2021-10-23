@@ -39,6 +39,6 @@ Data should be submitted via POST request as a JSON to https://frosty-wood-6558.
 
 - design;
 - media queries;
-- animations (on opening)
+- animations;
 
 ### The app has been deployed to https://kristinapeneva.com/registration-form/
